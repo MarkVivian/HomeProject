@@ -121,3 +121,27 @@ export default function Home() {
     </>
   )
 }
+          //INITIALISING FIREBASE AND BEGIN USING THE SDKs FOR THE PRODUCTS
+/* 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDdf0AGCClue-dz1-yjcxCDix6lr-jAJ4A",
+  authDomain: "home-ac88b.firebaseapp.com",
+  projectId: "home-ac88b",
+  storageBucket: "home-ac88b.appspot.com",
+  messagingSenderId: "663522917159",
+  appId: "1:663522917159:web:f7b1e4b4d6cfb1d4880702",
+  measurementId: "G-0QLM58CWQE"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+*/
