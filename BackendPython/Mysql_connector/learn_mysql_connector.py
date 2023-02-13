@@ -19,6 +19,7 @@ else:
 cursor = my_database.cursor()
 
 # let's give the database a command
+# we are going to use the commands we learned in the mysql tutorials.
 cursor.execute("SHOW TABLES")
 
 # let's get the results from the executed command
