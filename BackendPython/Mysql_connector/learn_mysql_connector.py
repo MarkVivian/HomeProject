@@ -26,3 +26,11 @@ cursor.execute("SHOW TABLES")
 results = cursor.fetchall()
 
 print(results)
+
+# when inserting data, if we are using the mysql.connector package, we use the %s as a place holder
+# cursor.execute("INSERT INTO chosenHome(homeName, homeLocation) VALUES(%s, %s)", ("Gelest Hostels", "Chuka"))
+
+# to make sure that the insertions, updates or deletions are made in the database, we use the command Commit()
+cursor.execute("INSERT INTO chosenHome VALUES(%s)", ("mark"))
+my_database.commit()
+
