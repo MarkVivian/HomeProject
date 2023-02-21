@@ -2,8 +2,8 @@
 .navbar{
   position: relative;
   display: flex;
-  background-color: rgb(39, 37, 37);
   color: white;
+  background-color: rgb(39, 37, 37);
   width: 100vw; 
   height: 2.5rem;
 }
@@ -118,3 +118,48 @@
 
           /************HOME PAGE ******************/
 /*******SLIDER ********************/
+.rotate{
+  transform: rotate(180deg);
+  right: 0rem;
+  margin: 2rem;
+  background-color: white;
+  border-radius: 2rem;
+  scale: 2;
+}
+
+
+
+.imageText{
+  position: absolute;
+  color: white;
+  height: 12rem;
+  width: 50%;
+  top: 30%;
+  left: 15%;
+  font-size: 2.5em;
+}
+
+.imageFormat{
+  filter: brightness(0.5) contrast(1.5);
+}
+
+.remain, .rotate{
+    position: absolute;
+    top: 50%;
+}
+
+.remain{
+  background-color: white;
+  left: 0 rem;
+  margin: 2rem;
+  background-color: white;
+  border-radius: 2rem;
+  scale: 2;
+}
+
+.mainSlider{
+  position : relative;
+  display: grid;
+  place-content: center;
+  background: rgb(20, 19, 19);
+}

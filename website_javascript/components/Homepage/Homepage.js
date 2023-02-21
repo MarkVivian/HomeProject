@@ -1,9 +1,9 @@
 import Slider from "./Slider/Slider";
 
-export default function Homepage(){
+export default function Homepage({data}){
     return(
         <div>
-            <Slider />
+            <Slider data={data}/>
 
         </div>
     )
