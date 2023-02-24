@@ -25,5 +25,15 @@
             "imageUrl" : "",
             "houseName" : ""
         }
+    ],
+    "users" : [
+        {
+            "userName" : "Mark Vivian",
+            "password" : "1234"
+        },
+        {
+            "userName" : "Kendrick Lamal",
+            "password": "5678"
+        }
     ]
 }

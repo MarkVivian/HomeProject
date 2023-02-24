@@ -17,6 +17,16 @@ export default function SignIn(){
           dispatch(auth_Actions.SignUp([sign.firstName, sign.lastName, sign.email, sign.newPassword]))
     }
     
+    function ChangeSign(event){
+        const {value, name} = event.target
+        setSign((item)=>{
+            return{
+                ...item,
+                [name] : value
+            }
+        })
+    }
+    
     return(
         <>
         <form>
@@ -25,20 +35,11 @@ export default function SignIn(){
                     first Name
                 </label>
                 <input 
-                onChange={(events)=>{
-                    const {value} = events.target
-                    setSign((item)=>{
-                        return{
-                            ...item,
-                            firstName : value
-                        }
-                    })
-                }
-                } 
                 type="text"
                 name="firstName" 
                 value={sign.firstName}
                 placeholder="Enter your firstName"
+                onChange={ChangeSign} 
                 id="firstName"/>
             </div>
             
@@ -47,16 +48,7 @@ export default function SignIn(){
                     lastName
                 </label>
                 <input 
-                onChange={(events)=>{
-                    const {value} = events.target
-                    setSign((item)=>{
-                        return{
-                            ...item,
-                            lastName : value
-                        }
-                    })
-                }
-                } 
+                onChange={ChangeSign}  
                 type="text"
                 name="lastName" 
                 value={sign.lastName}
@@ -69,16 +61,7 @@ export default function SignIn(){
                     email
                 </label>
                 <input 
-                onChange={(events)=>{
-                    const {value} = events.target
-                    setSign((item)=>{
-                        return{
-                            ...item,
-                            email : value
-                        }
-                    })
-                }
-                } 
+                onChange={ChangeSign} 
                 type="text"
                 name="email" 
                 value={sign.email}
@@ -91,15 +74,7 @@ export default function SignIn(){
                     Password
                 </label>
                 <input 
-                    onChange={(events)=>{
-                        const {value} = events.target
-                        setSign((item)=>{
-                            return{
-                                ...item,
-                                newPassword : value
-                            }
-                        })
-                    }}
+                    onChange={ChangeSign}
                     type="password"
                     name="newPassword"
                     value={sign.newPassword}
