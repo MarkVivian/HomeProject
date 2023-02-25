@@ -1,4 +1,4 @@
-{"slider_images": [
+[
     {
         "imageUrl" : "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG9tZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60", 
         "imageId" : "0",
@@ -19,21 +19,4 @@
         "imageId" : "3",
         "description" : "Eu pariatur pariatur cupidatat aliquip ipsum. Laboris voluptate sit labore aliquip exercitation laborum nostrud nisi irure. Amet dolor est ullamco deserunt id "
     }
-    ],
-    "houses" : [
-        {
-            "imageUrl" : "",
-            "houseName" : ""
-        }
-    ],
-    "users" : [
-        {
-            "userName" : "Mark Vivian",
-            "password" : "1234"
-        },
-        {
-            "userName" : "Kendrick Lamal",
-            "password": "5678"
-        }
-    ]
-}
+]

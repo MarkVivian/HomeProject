@@ -3,7 +3,21 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Link from "next/link"
 
-export default function SignIn(){
+function SignInValidation(data){
+    const values = Object.values(data)
+    if(values.every(values => values)){
+        return true
+    }else{
+        return false
+    }
+}
+
+function CompareSign(info, emailData){
+  return info.some(obj => obj["email"] === emailData);
+}
+
+export default function SignIn({data}){
+    console.log(data)
     const dispatch = useDispatch()
     const [sign, setSign] = useState({
         firstName : "",
@@ -11,10 +25,35 @@ export default function SignIn(){
         email : "",
         newPassword : ""
     })
+    
+    const [message, setMessage] = useState({
+        message : ""
+    })
         
     const SubmitSignUp = (events)=>{
           events.preventDefault()
-          dispatch(auth_Actions.SignUp([sign.firstName, sign.lastName, sign.email, sign.newPassword]))
+          const validation = SignInValidation(sign)
+          const comparison = CompareSign(data, sign.email)
+          console.log(comparison)
+          if(validation && comparison){
+                setMessage(()=>{
+                    return{
+                        message : "welcome"
+                    }
+                })
+                dispatch(auth_Actions.SignUp([sign.firstName, sign.lastName, sign.email, sign.newPassword, true]))
+          }else{
+            if(!validation){
+                setMessage(()=>{
+                    return{
+                        message : "please fill in all the fields"
+                    }
+                })
+            }else if(!comparison){
+                setMessage(()=>{
+                    return{message : "email already in use"}})
+            }
+          }
     }
     
     function ChangeSign(event){
@@ -30,6 +69,7 @@ export default function SignIn(){
     return(
         <>
         <form>
+            <h2>{message.message}</h2>
             <div>
                 <label htmlFor="firstName">
                     first Name
