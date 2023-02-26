@@ -4,7 +4,6 @@ export default function Homepage({data}){
     return(
         <div>
             <Slider data={data}/>
-
         </div>
     )
 }

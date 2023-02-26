@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "@/styles/Home.module.css"
 import arrowPressed from "/public/arrowPointers/arrowPressed.png"
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 
 export default function Slider({data}) {
     
@@ -42,7 +43,8 @@ export default function Slider({data}) {
     }    
 
     return(
-        <div className={styles.mainSlider}>  
+        <>
+            <div className={styles.mainSlider}>  
             <div className={styles.switch}>
                 <Image src={img.imgUrl[calculation]} alt="imageUrl" width={1400} height={600} className={styles.imageFormat}/>
                 <p className={styles.imageText}>{img.imgDesc[calculation]}</p>
@@ -50,6 +52,11 @@ export default function Slider({data}) {
             <Image src={arrowPressed} onClick={prevImg} alt="arrow" width={37.5} height={37.5} className={styles.remain}/> 
             <Image src={arrowPressed} onClick={nextImg} alt="arrow" width={37.5} height={37.5} className={styles.rotate} />
         </div>
+        <button className={styles.button} onClick={()=>{
+            const Router = useRouter()
+            Router("/[houseGroup]")
+        }}>begin</button>
+        </>
     )
    
 }
