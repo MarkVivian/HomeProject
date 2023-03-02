@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "@/styles/Home.module.css"
 import arrowPressed from "/public/arrowPointers/arrowPressed.png"
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function Slider({data}) {

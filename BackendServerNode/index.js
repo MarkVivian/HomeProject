@@ -1,8 +1,8 @@
 const Express = require("express")
 const Cors = require("cors")
 const slider_images = require("./Data/slider_images.json")
-const users = require("./Data/users.json")
-const houses = require("./Data/houses.json")
+const user = require("./Data/Users")
+const houses = require("./Data/Houses")
 
 
 const App = Express()
@@ -16,24 +16,13 @@ App.get("/slider_images", (req, res)=>{
     console.log("the slider_images has been sent")
 })
 
-App.get("/users", (req, res)=>{
-    res.status(200).send(users)
-    console.log("the data has been sent")
+App.post("/postUsers", (req, res)=>{
+
 })
 
+App.get("/getUsers", (req, res)=>{
 
-App.post("/newUsers", (req, res)=>{
-    const data = req.body
-    console.log("data received is ", data)
-    res.status(200).send({message : "the data has been recieved"})
-    WriteDataJson(data, "./Data/users.json")
 })
-
-App.get("/houses", (req, res)=>{
-    res.status(200).send(houses)
-    console.log("the houses have been sent")
-})
-
 
 
                   //TEST THE CONNECTION
