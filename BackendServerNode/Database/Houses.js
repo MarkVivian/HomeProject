@@ -10,19 +10,36 @@ class HouseDatabase{
     }
 
     async GetHouseInfo(){
-        const [rows, fields] = await this.connection.query("SELECT * FROM userDetails")
-        this.userInfo = rows;
+        const [rows, fields] = await this.connection.query("SELECT * FROM houseDetails")
+        this.houseInfo = rows;
+    }
+    
+    async GetHouseImages(){
+        const [rows, fields] = await this.connection.query("SELECT * FROM houseImages")
+        this.houseImages = rows;
     }
 
     async SendHouseInfo(info){
         console.log("the data is being writted")
-        const sql = "INSERT INTO userDetails (firstName, lastName, userNumber) VALUES (?, ?, ?)";
-        const values = [info.houseName, info.imageUrl, info.freeHouses, info.houseLocation];
+        const sql = "INSERT INTO houseDetails (houseName, freeHouses, houseLocation) VALUES (?, ?, ?)";
+        const values = [info.houseName, info.freeHouses, info.houseLocation];
        
         this.connection.query(sql, values, (error, results, fields) => {
           if (error) throw error;
           console.log('Data inserted successfully');
         });
+        console.log("the data has been written")
+    }
+    
+    async SendHouseImages(info){
+        console.log("the data is being written...")
+        const sql = "INSERT INTO houseImages (houseId, imageUrl) VALUES(?, ?)"
+        const values = [info.houseId, info.imageUrl]
+        
+        this.connection.query(sql, values, (error, results, fields)=>{
+            if(error) throw error;
+            console.log("data inserted succesfully")
+        })
         console.log("the data has been written")
     }
 
@@ -42,5 +59,6 @@ class HouseDatabase{
         }catch(err){
             console.log(`error occurred when connecting to the database. ${err}`)
         }
-    }}
+    }
+}
 module.exports = HouseDatabase;

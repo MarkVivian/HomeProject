@@ -1,7 +1,7 @@
 const mysql2 = require("mysql2/promise")
 
 
-class userDatabase{
+class UserDatabase{
     // this is the only way to make the public variables in javascript.
     constructor(){
       this.connection = null
@@ -21,7 +21,7 @@ class userDatabase{
 
     async SendUsersToDatabase(info){
         console.log("the data is being writted......")
-        const sql = "INSERT INTO userDetails (firstName, lastName, userPassword, userEmail, userNumber) VALUES (?, ?, ?, ?)";
+        const sql = "INSERT INTO userDetails (firstName, lastName, userPassword, userEmail, userNumber) VALUES (?, ?, ?, ?, ?)";
         const values = [info.firstName, info.lastName, info.userPassword, info.userEmail, info.userNumber];
        
         this.connection.query(sql, values, (error, results, fields) => {
@@ -33,7 +33,7 @@ class userDatabase{
     
     async SendOwnersToDatabase(info){
         console.log("the data is being writted......")
-        const sql = "INSERT INTO ownerDetails (firstName, lastName, ownerPassword, ownerEmail, ownerNumber) VALUES (?, ?, ?, ?)";
+        const sql = "INSERT INTO ownerDetails (firstName, lastName, ownerPassword, ownerEmail, ownerNumber) VALUES (?, ?, ?, ?, ?)";
         const values = [info.firstName, info.lastName, info.ownerPassword, info.ownerEmail, info.ownerNumber];
        
         this.connection.query(sql, values, (error, results, fields) => {
@@ -61,4 +61,4 @@ class userDatabase{
         }
     }
 }
-module.exports = userDatabase;
+module.exports = UserDatabase;

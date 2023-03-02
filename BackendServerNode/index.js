@@ -1,9 +1,8 @@
 const Express = require("express")
 const Cors = require("cors")
-const slider_images = require("./Data/slider_images.json")
-const user = require("./Data/Users")
-const houses = require("./Data/Houses")
-
+const slider_images = require("./Database/slider_images.json")
+const UserDatabase = require("./Database/Users")
+const HouseDatabase = require("./Database/Houses")
 
 const App = Express()
 App.use(Cors())
@@ -16,13 +15,58 @@ App.get("/slider_images", (req, res)=>{
     console.log("the slider_images has been sent")
 })
 
-App.post("/postUsers", (req, res)=>{
 
+                // USER AND OWNER API
+App.post("/postUsers", (req, res)=>{
+    const data = req.body
+    const User = new UserDatabase()
+    User.DatabaseConnection()
+    .then(()=>{
+        User.SendUsersToDatabase(data)
+    })
+    res.status(200).send({message : "the user data has been recieved successfully"});
+})
+
+App.post("/postOwners", (req, res)=>{
+    const data = req.body
+    const User = new UserDatabase()
+    User.DatabaseConnection()
+    .then(()=>{
+      User.SendOwnersToDatabase(data)      
+    })
+    res.status(200).send({message : "the owner data has been recieved successfully"});
 })
 
 App.get("/getUsers", (req, res)=>{
-
+    const User = new UserDatabase()
+    User.DatabaseConnection()
+    .then(()=>{
+        User.GetUserFromDatabase()
+        .then(()=>{
+            res.status(200).send(User.userInfo)
+        })
+    })
+    console.log("the user data has been sent");
 })
+
+App.get("/getOwners", (req, res)=>{
+    const User = new UserDatabase()
+    User.DatabaseConnection()
+    .then(()=>{
+        User.GetOwnerFromDatabase()
+        .then(()=>{
+            res.status(200).send(User.ownerInfo)
+        })
+    })
+    console.log("the owner data has been sent")
+})
+
+
+                    // HOUSES API
+                    
+                    
+                    
+                    
 
 
                   //TEST THE CONNECTION
