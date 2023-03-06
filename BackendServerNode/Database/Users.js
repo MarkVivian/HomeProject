@@ -10,6 +10,7 @@ class UserDatabase{
     }
 
     async GetUserFromDatabase(){
+        // here we will pass the query we want to run
         const [rows, fields] = await this.connection.query("SELECT * FROM userDetails")
         this.userInfo = rows
     }
@@ -43,8 +44,11 @@ class UserDatabase{
         console.log("the data has been written......")
     }
 
+    
+    // this method is to make sure that the connection is good.
     async DatabaseConnection(){
         try{
+            // makes the connection
             this.connection = await mysql2.createConnection({
                 host: 'localhost',
                 user: 'root',

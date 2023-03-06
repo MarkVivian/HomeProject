@@ -4,6 +4,7 @@ const slider_images = require("./Database/slider_images.json")
 const UserDatabase = require("./Database/Users")
 const HouseDatabase = require("./Database/Houses")
 
+
 const App = Express()
 App.use(Cors())
 App.use(Express.json())
@@ -62,9 +63,10 @@ App.get("/getOwners", (req, res)=>{
 })
 
 
-                    // HOUSES API
-                    
-                    
+App.get("/test", (req, res)=>{
+    res.status(200).send()
+    console.log("the test is running")
+})            
                     
                     
 
