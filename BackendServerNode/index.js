@@ -1,7 +1,6 @@
 const Express = require("express")
 const Cors = require("cors")
 const slider_images = require("./Database/slider_images.json")
-const UserDatabase = require("./Database/Users")
 const Database = require("./Database/Database")
 
 const App = Express()
