@@ -2,8 +2,7 @@ const Express = require("express")
 const Cors = require("cors")
 const slider_images = require("./Database/slider_images.json")
 const UserDatabase = require("./Database/Users")
-const HouseDatabase = require("./Database/Houses")
-
+const Database = require("./Database/Database")
 
 const App = Express()
 App.use(Cors())
@@ -51,7 +50,7 @@ App.get("/getUsers", (req, res)=>{
 })
 
 App.get("/getOwners", (req, res)=>{
-    const User = new UserDatabase()
+    const User = new Database()
     User.DatabaseConnection()
     .then(()=>{
         User.GetOwnerFromDatabase()
@@ -61,15 +60,6 @@ App.get("/getOwners", (req, res)=>{
     })
     console.log("the owner data has been sent")
 })
-
-
-App.get("/test", (req, res)=>{
-    res.status(200).send()
-    console.log("the test is running")
-})            
-                    
-                    
-
 
                   //TEST THE CONNECTION
 App.listen(3000, ()=>{
