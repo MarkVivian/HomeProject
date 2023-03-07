@@ -4,6 +4,8 @@ const Cors = require("cors")
 const slider_images = require("./Database/slider_images.json")
 // * this is connecting to the database.
 const Database = require("./Database/Database")
+// * this will deal with the sign in and Authentication logic
+const { Auth, Sign } = require("./Authenticate")
 
 const App = Express()
 App.use(Cors())
@@ -16,19 +18,22 @@ App.get("/slider_images", (req, res)=>{
     console.log("the slider_images has been sent")
 })
 
-
-                // USER AND OWNER API
 App.get("/AuthenticateMe", (req, res)=>{
     const body = req.body
-    const Auth = new Database()
-    Auth.DatabaseConnection()
+    const Authenticate = new Database()
+    Authenticate.DatabaseConnection()
     .then(()=>{
-        Auth.ReadSpecificDatabase("userDetails", ["userName", "userPassword"])
+        Authenticate.ReadSpecificDatabase("userDetails", ["userName", "userPassword"])
         .then(()=>{
-            if(Authenticate(Auth.rows, body)){
-                res.status(200).send({"message": "user logged in successfully", "status" : true})
+            const {state, control} = Auth(Authenticate.rows, body)
+            if(state){
+                if(control){
+                    res.status(200).send({"message": "Admin has logged in successfully", "status" : true, "control" : true})
+                }else{
+                res.status(200).send({"message": "user logged in successfully", "status" : true, "control" : false})
+                }
             }else{
-                res.status(200).send({"message": "invalid user details", "status" : false})
+                res.status(200).send({"message": "invalid user details", "status" : false, "control": false})
             }
         })
     })
@@ -47,28 +52,23 @@ App.get("/AuthenticateMe", (req, res)=>{
  */
 })
 
-
-function Authenticate(rows, body){
-    try{
-        var state = null
-        rows.map((item)=>{
-            if(item.userName === body.userName && item.userPassword === body.userPassword){
-               console.log("user allowed")
-               state = true
-               return
+App.get("/AddMe", (req, res)=>{
+    const body = JSON.parse(JSON.stringify(req.body))
+    const signIn = new Database()
+    signIn.DatabaseConnection()
+    .then(()=>{
+        signIn.ReadSpecificDatabase("userDetails", ["userEmail", "userNumber"])
+        .then(()=>{
+            if(Sign(signIn.rows, body)){
+                signIn.WriteDatabase("userDetails", ["firstName","lastName", "userName","userPassword","userEmail", "userNumber"], [body.firstName, body.lastName, body.userName, body.userPassword, body.userEmail, body.userNumber])
+                res.status(200).send({"message" : "you have been signed in successfully", "status" : true})
             }else{
-                console.log("user not allowed")
-                state = false
+                res.status(200).send({"message" : "your email or phone number is in use.", "status" : false})
             }
         })
-        return state
-    }catch(err){
-        console.log("an error occured while authenticating the user: ", err)
-    }
-}
-                
-      
-                
+    })
+})
+               
                 
                 
 App.listen(3003, ()=>{
