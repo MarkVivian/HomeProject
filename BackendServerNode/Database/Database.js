@@ -36,7 +36,6 @@ class Database{
         try{
 
             const [rows, fields] = await this.connection.query(`SELECT * FROM ${tableName}`)
-            console.log(rows)
             this.rows = rows;
         }catch(err){
             console.log(`an error occured when reading data from the database ${tableName} : ${err}`)
@@ -48,7 +47,6 @@ class Database{
         try{
             // ? this will read the data from the database and store it either in fields and rows.
             const [rows, fields] = await this.connection.query(`SELECT ${column} FROM ${tableName}`)
-            console.log(rows)
             this.rows = rows;
         }catch(err){
             console.log(`an error occured when reading a specific column from the table ${tableName} on column ${column} : ${err}`)

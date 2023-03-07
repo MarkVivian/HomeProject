@@ -4,8 +4,6 @@ const Cors = require("cors")
 const slider_images = require("./Database/slider_images.json")
 // * this is connecting to the database.
 const Database = require("./Database/Database")
-// * this connects to the function with authentication code.
-const Auth = require("./Authentication/Auth")
 
 const App = Express()
 App.use(Cors())
@@ -21,9 +19,21 @@ App.get("/slider_images", (req, res)=>{
 
                 // USER AND OWNER API
 App.get("/AuthenticateMe", (req, res)=>{
-    body = req.body
+    const body = req.body
+    const Auth = new Database()
+    Auth.DatabaseConnection()
+    .then(()=>{
+        Auth.ReadSpecificDatabase("userDetails", ["userName", "userPassword"])
+        .then(()=>{
+            if(Authenticate(Auth.rows, body)){
+                res.status(200).send({"message": "user logged in successfully", "status" : true})
+            }else{
+                res.status(200).send({"message": "invalid user details", "status" : false})
+            }
+        })
+    })
     /*
-    if(Auth(body)){
+   if(Auth(body)){
         res.status(200).send({
             message : "user approved",
             status : true
@@ -34,10 +44,28 @@ App.get("/AuthenticateMe", (req, res)=>{
             status : false
         })
     }
-    */
+ */
 })
-Auth("hello world")
 
+
+function Authenticate(rows, body){
+    try{
+        var state = null
+        rows.map((item)=>{
+            if(item.userName === body.userName && item.userPassword === body.userPassword){
+               console.log("user allowed")
+               state = true
+               return
+            }else{
+                console.log("user not allowed")
+                state = false
+            }
+        })
+        return state
+    }catch(err){
+        console.log("an error occured while authenticating the user: ", err)
+    }
+}
                 
       
                 

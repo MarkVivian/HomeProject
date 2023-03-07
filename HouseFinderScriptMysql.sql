@@ -6,6 +6,7 @@ CREATE TABLE userDetails(
 	userId INT AUTO_INCREMENT PRIMARY KEY,
 	firstName VARCHAR(30),
     lastName VARCHAR(30),
+    userName VARCHAR(30),
     userPassword VARCHAR(30),
     userEmail VARCHAR(30),
     userNumber VARCHAR(30)
@@ -15,6 +16,7 @@ INSERT INTO userDetails VALUES(
 	DEFAULT,
     "Mark",
     "Vivian",
+    "MarkOriginal",
     "1234",
     "Admin@test.com",
     "+254716939459"
