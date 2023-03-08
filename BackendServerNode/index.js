@@ -1,7 +1,5 @@
 const Express = require("express")
 const Cors = require("cors")
-// * this will connect to the slider images
-const slider_images = require("./Database/slider_images.json")
 // * this is connecting to the database.
 const Database = require("./Database/Database")
 // * this will deal with the sign in and Authentication logic
@@ -11,14 +9,19 @@ const App = Express()
 App.use(Cors())
 App.use(Express.json())
 
-
                 //FOR FETCH REQUESTS
 App.get("/slider_images", (req, res)=>{
-    res.send(slider_images)
-    console.log("the slider_images has been sent")
+    const slider = new Database()
+    slider.DatabaseConnection()
+    .then(()=>{
+        slider.ReadSpecificDatabase("sliderImages",["imageUrl", "imageText"])
+        .then(()=>{
+            res.status(200).send(slider.rows)
+        })
+    })
 })
 
-App.get("/AuthenticateMe", (req, res)=>{
+App.post("/AuthenticateMe", (req, res)=>{
     const body = req.body
     const Authenticate = new Database()
     Authenticate.DatabaseConnection()
@@ -52,7 +55,7 @@ App.get("/AuthenticateMe", (req, res)=>{
  */
 })
 
-App.get("/AddMe", (req, res)=>{
+App.post("/AddMe", (req, res)=>{
     const body = JSON.parse(JSON.stringify(req.body))
     const signIn = new Database()
     signIn.DatabaseConnection()
@@ -68,10 +71,7 @@ App.get("/AddMe", (req, res)=>{
         })
     })
 })
-               
-                
-                
-App.listen(3003, ()=>{
+                             
+App.listen(3000, ()=>{
     console.log("the port is running")
 })
-

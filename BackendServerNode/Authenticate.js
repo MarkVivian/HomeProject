@@ -4,7 +4,6 @@ function Authenticate(rows, body){
         var control = null
         rows.map((item)=>{
             if(item.userName === body.userName && item.userPassword === body.userPassword){
-               console.log("user allowed")
                state = true
                return true
             }
@@ -26,7 +25,6 @@ function SignIn(rows, body){
         var state = true
         rows.map((item)=>{
             if(item.userEmail === body.userEmail || item.userNumber === body.userNumber){
-               console.log("user allowed")
                state = false
                return false
             }
