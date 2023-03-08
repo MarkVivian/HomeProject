@@ -2,52 +2,31 @@ import { auth_Actions } from "@/Store/AuthSlice"
 import Link from "next/link"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-
-function CheckValidation(data, input){
-    // FIX THIS BUG NOT WORKING
-    console.log(data.length)
-    for(var i = 0; i < data.length; i++){
-        const dataUserName = data[i].firstName.toLowerCase()
-        const dataPassword = data[i].password
-        const userName = input.userName.toLowerCase()
-        const userPassword = input.password
-        
-        if(userName === dataUserName && userPassword === dataPassword){
-            return true
-        }else{
-            return false
-        }
-    }
-}
+import IsEmpty from "../IsEmpty"
 
 export default function Login({data}){    
     const dispatch = useDispatch()
     
     const [loginInfo, useLoginInfo] = useState({
-        userName : "",
-        password : "", 
-        message : ""
-    })
+        firstName : "",
+        userPassword : ""
+     })
         
-    function SubmitLoginInfo(events){
-          events.preventDefault()
-          if(CheckValidation(data, loginInfo)){
-            if(loginInfo.userName.toLowerCase() === "mark"){
-                dispatch(auth_Actions.Position("admin"))
-            }else{
-                dispatch(auth_Actions.Position("user"))
-            }
+    function SubmitLoginInfo(){
+          if(IsEmpty(loginInfo)){
+            console.log(loginInfo)
+            dispatch(auth_Actions.loginFunction([loginInfo.firstName, loginInfo.userPassword]))
             useLoginInfo((item)=>{
                 return{
-                    ...item,
-                    message : "Logged in successfully"
+                    firstName : item.firstName,
+                    userPassword : item.userPassword
                 }
             })
           }else{
             useLoginInfo((item)=>{
                 return{
                     ...item,
-                    message : "incorrect userName or password"
+                    message : "Please fill in all the fields"
                 }
             })
           }
@@ -66,18 +45,18 @@ export default function Login({data}){
     return(
         <>
         <form>
-             <h2>{loginInfo.message}</h2>  
+            <h1>{loginInfo.message}</h1>
             <div>
-                <label htmlFor="UserName">
-                    UserName
+                <label htmlFor="firstName">
+                    firstName
                 </label>
                 <input 
                 onChange={ChangeLogin} 
                 type="text"
-                name="userName" 
-                value={loginInfo.userName}
-                placeholder="Enter your userName"
-                id="UserName"/>
+                name="firstName" 
+                value={loginInfo.firstName}
+                placeholder="Enter your firstName"
+                id="firstName"/>
             </div>
 
             <div>
@@ -87,8 +66,8 @@ export default function Login({data}){
                 <input 
                     onChange={ChangeLogin}
                     type="password"
-                    name="password"
-                    value={loginInfo.password}
+                    name="userPassword"
+                    value={loginInfo.userPassword}
                     id="password"
                     placeholder="enter your password"
                 />

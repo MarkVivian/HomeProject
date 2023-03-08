@@ -16,7 +16,7 @@ export default function Slider({data}) {
             setImg((res)=>{
                 return{
                     imgUrl : [...res.imgUrl, item.imageUrl],
-                    imgDesc : [...res.imgDesc, item.description]
+                    imgDesc : [...res.imgDesc, item.imageText]
                 }
             })
         })

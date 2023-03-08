@@ -26,7 +26,7 @@ App.post("/AuthenticateMe", (req, res)=>{
     const Authenticate = new Database()
     Authenticate.DatabaseConnection()
     .then(()=>{
-        Authenticate.ReadSpecificDatabase("userDetails", ["userName", "userPassword"])
+        Authenticate.ReadSpecificDatabase("userDetails", ["firstName", "userPassword"])
         .then(()=>{
             const {state, control} = Auth(Authenticate.rows, body)
             if(state){
@@ -64,14 +64,24 @@ App.post("/AddMe", (req, res)=>{
         .then(()=>{
             if(Sign(signIn.rows, body)){
                 signIn.WriteDatabase("userDetails", ["firstName","lastName", "userName","userPassword","userEmail", "userNumber"], [body.firstName, body.lastName, body.userName, body.userPassword, body.userEmail, body.userNumber])
-                res.status(200).send({"message" : "you have been signed in successfully", "status" : true})
+                res.status(200).send({"message" : "you have been signed in successfully", "status" : true, "control" : false})
             }else{
-                res.status(200).send({"message" : "your email or phone number is in use.", "status" : false})
+                res.status(200).send({"message" : "your email or phone number is in use.", "status" : false, "control" : false})
             }
         })
     })
 })
+
+App.post("/testMe", (req, res)=>{
+    res.status(200).send({"message": "Admin has logged in successfully", "status" : true, "control" : true, "body": req.body})
+    console.log(req.body)
+})
+
+App.post("/testMwa", (req, res)=>{
+    res.status(200).send({"message": "Admin has logged in successfully", "status" : true, "control" : true, "body": req.body})
+    console.log(req.body)
+})
                              
 App.listen(3000, ()=>{
-    console.log("the port is running")
+    console.log(`the port is running http://localhost:3000`)
 })

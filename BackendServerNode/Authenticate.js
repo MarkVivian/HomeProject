@@ -3,7 +3,7 @@ function Authenticate(rows, body){
         var state = null
         var control = null
         rows.map((item)=>{
-            if(item.userName === body.userName && item.userPassword === body.userPassword){
+            if(item.firstName === body.firstName && item.userPassword === body.userPassword){
                state = true
                return true
             }

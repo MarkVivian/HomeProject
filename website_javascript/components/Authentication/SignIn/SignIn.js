@@ -3,57 +3,20 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Link from "next/link"
 
-function SignInValidation(data){
-    const values = Object.values(data)
-    if(values.every(values => values)){
-        return true
-    }else{
-        return false
-    }
-}
-
-function CompareSign(info, emailData){
-  return info.some(obj => obj["email"] === emailData);
-}
-
-export default function SignIn({data}){
-    console.log(data)
+export default function SignIn(){
     const dispatch = useDispatch()
     const [sign, setSign] = useState({
         firstName : "",
         lastName : "",
-        email : "",
-        newPassword : ""
+        userEmail : "",
+        userPassword : "",
+        userNumber : ""
     })
     
-    const [message, setMessage] = useState({
-        message : ""
-    })
         
     const SubmitSignUp = (events)=>{
           events.preventDefault()
-          const validation = SignInValidation(sign)
-          const comparison = CompareSign(data, sign.email)
-          console.log(comparison)
-          if(validation && comparison){
-                setMessage(()=>{
-                    return{
-                        message : "welcome"
-                    }
-                })
-                dispatch(auth_Actions.SignUp([sign.firstName, sign.lastName, sign.email, sign.newPassword, true]))
-          }else{
-            if(!validation){
-                setMessage(()=>{
-                    return{
-                        message : "please fill in all the fields"
-                    }
-                })
-            }else if(!comparison){
-                setMessage(()=>{
-                    return{message : "email already in use"}})
-            }
-          }
+          
     }
     
     function ChangeSign(event){
@@ -63,13 +26,13 @@ export default function SignIn({data}){
                 ...item,
                 [name] : value
             }
+            DEFAU
         })
     }
     
     return(
         <>
         <form>
-            <h2>{message.message}</h2>
             <div>
                 <label htmlFor="firstName">
                     first Name
@@ -103,8 +66,8 @@ export default function SignIn({data}){
                 <input 
                 onChange={ChangeSign} 
                 type="text"
-                name="email" 
-                value={sign.email}
+                name="userEmail" 
+                value={sign.userEmail}
                 placeholder="Enter your email"
                 id="email"/>
             </div>
@@ -116,10 +79,24 @@ export default function SignIn({data}){
                 <input 
                     onChange={ChangeSign}
                     type="password"
-                    name="newPassword"
-                    value={sign.newPassword}
+                    name="userPassword"
+                    value={sign.userPassword}
                     id="password"
                     placeholder="enter your password"
+                />
+            </div>
+            
+            <div>
+                <label htmlFor="Number">
+                    Number
+                </label>
+                <input 
+                    onChange={ChangeSign}
+                    type="text"
+                    name="userNumber"
+                    value={sign.userNumber}
+                    id="Number"
+                    placeholder="enter your Number"
                 />
             </div>
             

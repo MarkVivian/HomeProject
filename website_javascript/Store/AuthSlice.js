@@ -6,24 +6,40 @@ export const authSlice = createSlice({
         signUp : {
             firstName : "",
             lastName : "",
-            email : "",
-            password : "",
+            userEmail : "",
+            userPassword : "",
+            userNumber : "",
+            state : false
         },
-        state : false,
         login :{
-            position: ""
+            firstName : "",
+            userPassword : "",
+            state : false
+        },
+        Allowed : {
+            message : "",
+            state : false,
+            control : false
         }
     },
     reducers : {
-        SignUp(state, actions){
+        SignFunction(state, actions){
             state.signUp.firstName = actions.payload[0]
             state.signUp.lastName = actions.payload[1]
-            state.signUp.email = actions.payload[2]
-            state.signUp.password = actions.payload[3]
-            state.state = actions.payload[4]
+            state.signUp.userEmail = actions.payload[2]
+            state.signUp.userPassword = actions.payload[3]
+            state.signUp.userNumber = actions.payload[4]
+            state.signUp.state = true
         },
-        Position(state, actions){
-            state.login.position = actions.payload
+        loginFunction(state, actions){
+            state.login.firstName = actions.payload[0]
+            state.login.userPassword = actions.payload[1]
+            state.login.state = true
+        },
+        confirmation(state, actions){
+            state.Allowed.message = actions.payload[0]
+            state.Allowed.state = actions.payload[1]
+            state.Allowed.control = actions.payload[2]
         }
     }
 })
