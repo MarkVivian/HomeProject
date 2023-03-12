@@ -29,12 +29,12 @@ export const authSlice = createSlice({
             state.signUp.userEmail = actions.payload[2]
             state.signUp.userPassword = actions.payload[3]
             state.signUp.userNumber = actions.payload[4]
-            state.signUp.state = true
+            state.state = true
         },
         loginFunction(state, actions){
             state.login.firstName = actions.payload[0]
             state.login.userPassword = actions.payload[1]
-            state.login.state = true
+            state.state = true
         },
         confirmation(state, actions){
             state.Allowed.message = actions.payload[0]

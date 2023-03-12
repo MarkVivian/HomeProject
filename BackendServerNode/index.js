@@ -81,7 +81,7 @@ App.post("/testMwa", (req, res)=>{
     res.status(200).send({"message": "Admin has logged in successfully", "status" : true, "control" : true, "body": req.body})
     console.log(req.body)
 })
-                             
-App.listen(3000, ()=>{
-    console.log(`the port is running http://localhost:3000`)
+const port = 3000              
+App.listen(port, ()=>{
+    console.log(`the port is running http://localhost:${port}`)
 })

@@ -14,7 +14,6 @@ export default function Login({data}){
         
     function SubmitLoginInfo(){
           if(IsEmpty(loginInfo)){
-            console.log(loginInfo)
             dispatch(auth_Actions.loginFunction([loginInfo.firstName, loginInfo.userPassword]))
             useLoginInfo((item)=>{
                 return{
@@ -80,5 +79,3 @@ export default function Login({data}){
         </>
     )
 }
-
-
